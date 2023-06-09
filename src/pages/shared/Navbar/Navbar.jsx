@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BsMoonStarsFill } from "react-icons/bs";
+import { BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -29,16 +29,16 @@ const Navbar = () => {
   }, []);
   const navMenuList = (
     <>
-      <li>
+      <li className="">
         <Link to="/">Home</Link>
       </li>
-      <li>
+      <li className="">
         <Link>About</Link>
       </li>
-      <li>
+      <li className="">
         <Link>Services</Link>
       </li>
-      <li>
+      <li className="">
         <Link>Contact</Link>
       </li>
     </>
@@ -99,15 +99,15 @@ const Navbar = () => {
                 <small>Hello! </small>
                 SoulSync
               </p>
-              <li>
+              <li className="">
                 <Link to="/dashboard/user-home" className="justify-between">
                   Profile
                 </Link>
               </li>
-              <li>
+              <li className="">
                 <Link to={"/dashboard"}>Dashboard</Link>
               </li>
-              <li>
+              <li className="">
                 <Link>Logout</Link>
               </li>
             </ul>
@@ -115,9 +115,15 @@ const Navbar = () => {
           <div className={`flex items-center ms-5 ${darkMode ? "dark" : ""}`}>
             <button
               onClick={toggleDarkMode}
-              className="dark:text-black text-white"
+              className={`dark:text-black ${
+                scrolling ? "text-black" : "text-white"
+              }`}
             >
-              <BsMoonStarsFill size={20} />
+              {darkMode ? (
+                <BsFillSunFill size={20} />
+              ) : (
+                <BsMoonStarsFill size={20} />
+              )}
             </button>
             {/* Rest of your component */}
           </div>
