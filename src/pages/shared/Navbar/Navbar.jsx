@@ -9,6 +9,10 @@ const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
+  const isAdmin = true;
+  const isInstructor = false;
+  const isStudent = false;
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     const htmlTag = document.querySelector("html");
@@ -42,9 +46,21 @@ const Navbar = () => {
       <li className="">
         <Link to={"/instructors"}>Instructors</Link>
       </li>
-      <li className="">
-        <Link>Contact</Link>
-      </li>
+      {user && (
+        <li>
+          <Link
+            to={
+              isAdmin
+                ? "/dashboard/admin-home"
+                : isInstructor
+                ? "/dashboard/instructor-home"
+                : isStudent && "/dashboard/student-home"
+            }
+          >
+            Dashboard
+          </Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -82,7 +98,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link
-            className={`btn btn-ghost normal-case text-xl ${
+            className={`btn btn-ghost normal-case text-xl dark:filter dark:invert  ${
               scrolling ? "" : "filter invert"
             }`}
             to={"/"}
