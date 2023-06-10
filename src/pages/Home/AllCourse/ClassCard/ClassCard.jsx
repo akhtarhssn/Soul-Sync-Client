@@ -1,19 +1,68 @@
+import { MdChair } from "react-icons/md";
+import { FaUserFriends } from "react-icons/fa";
+
 const ClassCard = ({ course }) => {
-  const { image, name } = course;
+  const { image, name, available_seats, enrolled_students, price, instructor } =
+    course;
   return (
-    <div className="card border border-gray-700 dark:border-gray-200 shadow-xl  text-white dark:text-black group">
+    <div
+      className={`card border border-gray-700 dark:border-gray-200 shadow-xl  text-white dark:text-black group ${
+        available_seats === 0 && "bg-red-600"
+      } `}
+    >
       <figure>
         <img
           src={image}
           alt="Shoes"
-          className="group-hover:scale-125 duration-700"
+          className="group-hover:scale-125 duration-700 relative"
         />
+        <p className="absolute top-5 right-5 font-medium px-5 rounded py-1 bg-orange-600 text-white">
+          ${price}
+        </p>
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{name}</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+        <div className="flex justify-between items-center">
+          <div
+            className={`flex items-center gap-3 ${
+              available_seats === 0 ? "text-white" : "text-orange-600"
+            }`}
+          >
+            <MdChair size={22} />
+            <p>{available_seats} Available Seats</p>
+          </div>
+          <div
+            className={`flex items-center gap-3 ${
+              available_seats === 0 ? "text-white" : "text-orange-600"
+            }`}
+          >
+            <FaUserFriends size={22} />
+            <p>{enrolled_students} Students</p>
+          </div>
+        </div>
+        <h2 className={`card-title ${available_seats === 0 && "text-white"}`}>
+          {name.length > 35 ? name.slice(0, 32) + "..." : name}
+        </h2>
+
+        <div className="mt-5 flex items-center gap-3">
+          <label tabIndex={0} className="avatar">
+            <div className="w-6 h-6 rounded-full">
+              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            </div>
+          </label>
+          <p className={`${available_seats === 0 && "text-white"}`}>
+            <span className="font-semibold">{instructor}</span>
+          </p>
+        </div>
+        <div className="card-actions mt-3">
+          <button
+            className={`py-3 px-8 rounded font-semibold uppercase ${
+              available_seats === 0
+                ? "bg-white dark:bg-white text-black"
+                : "bg-orange-700 dark:bg-orange-500 dark:text-white"
+            }`}
+          >
+            Enroll
+          </button>
         </div>
       </div>
     </div>

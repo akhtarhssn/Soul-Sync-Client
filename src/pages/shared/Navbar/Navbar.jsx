@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
+import { AuthContext } from "../../../providers/AuthProvider";
 const Navbar = () => {
+  const { user, handleLogout } = useContext(AuthContext);
   const [scrolling, setScrolling] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -48,7 +50,7 @@ const Navbar = () => {
       className={`navbar fixed z-10 ${
         scrolling
           ? "bg-white text-black border-b border-b-gray-200"
-          : "bg-black dark:bg-white bg-opacity-0 dark:text-black text-white"
+          : "bg-black dark:bg-white bg-opacity-20 dark:text-black text-white"
       }`}
     >
       <div className="max-w-7xl container mx-auto">
@@ -85,33 +87,48 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end flex justify-end ">
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-8 shadow bg-base-100 text-black rounded-box w-52"
-            >
-              <p>
-                <small>Hello! </small>
-                SoulSync
-              </p>
-              <li className="">
-                <Link to="/dashboard/user-home" className="justify-between">
-                  Profile
-                </Link>
-              </li>
-              <li className="">
-                <Link to={"/dashboard"}>Dashboard</Link>
-              </li>
-              <li className="">
-                <Link>Logout</Link>
-              </li>
-            </ul>
-          </div>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <label
+                tabIndex={0}
+                className="btn btn-ghost btn-circle avatar border-white"
+              >
+                <div className="w-10 rounded-full">
+                  <img src={user?.photoURL} />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-8 shadow bg-base-100 text-black rounded-box w-52"
+              >
+                <p>
+                  <small>Hello! </small>
+                  <strong>{user?.displayName}</strong>
+                </p>
+                <li className="">
+                  <Link to="/dashboard/user-home" className="justify-between">
+                    Profile
+                  </Link>
+                </li>
+                <li className="">
+                  <Link to={"/dashboard"}>Dashboard</Link>
+                </li>
+                <li className="">
+                  <Link onClick={handleLogout}>Logout</Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link to={"/login"}>
+              <button
+                className={`py-3 px-8 rounded bg-orange-600 dark:bg-orange-500 dark:text-white font-semibold uppercase ${
+                  scrolling && "text-white"
+                }`}
+              >
+                Login
+              </button>
+            </Link>
+          )}
           <div className={`flex items-center ms-5 ${darkMode ? "dark" : ""}`}>
             <button
               onClick={toggleDarkMode}

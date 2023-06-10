@@ -60,7 +60,7 @@ const WorkOut = () => {
               className="absolute left-[45%] animate-spin-slow dark:filter dark:invert"
             />
             <img
-              className="mx-auto h-64 sm:h-full w-auto z-10"
+              className="mx-auto h-64 sm:h-full w-auto z-10 object-contain"
               src="https://keenitsolutions.com/products/wordpress/educavo/wp-content/uploads/2021/04/join-us-image.png"
               alt="Workout"
             />
