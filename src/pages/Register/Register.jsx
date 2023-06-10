@@ -103,7 +103,7 @@ const RegisterTest = () => {
   };
 
   return (
-    <div className="py-16 container mx-auto min-h-screen md:flex justify-center items-center">
+    <div className="py-20 container mx-auto min-h-screen md:flex justify-center items-center">
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 p-5">
         <div className="text-center lg:text-left my-10 md:my-0 bg-cover">
           <img

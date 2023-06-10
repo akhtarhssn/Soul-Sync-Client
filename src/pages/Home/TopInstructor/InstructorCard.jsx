@@ -2,16 +2,17 @@ import { FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const InstructorCard = ({ instructor }) => {
   return (
-    <div className="relative overflow-hidden rounded-lg shadow-lg">
+    <div className="relative overflow-hidden rounded-lg shadow-lg group">
       <img
         src={instructor.photo}
         alt={instructor.name}
         className="w-full h-[480px] object-cover object-top"
       />
-      <div className="absolute inset-0 p-10 text-center flex flex-col items-center justify-end bg-orange-700 text-white bg-opacity-90 transition-all duration-500 ease-in-out opacity-0 hover:opacity-100 hover:translate-y-0 hover:transition-none">
-        <div className="transform hover:scale-90 space-y-5">
+      {/* info DIV */}
+      <div className="absolute m-auto w-[300px] h-[350px] rounded-xl inset-0 p-10 text-center flex flex-col items-center justify-end bg-orange-700 text-white transition-all duration-700 md:opacity-0 bottom-0 group-hover:bottom-10 md:group-hover:opacity-100 group-hover:translate-y-0">
+        <div className="space-y-5 ">
           <h3 className="text-2xl font-semibold">{instructor.name}</h3>
-          <p className="text-lg">{instructor.role}</p>
+          <p className="text-lg">{instructor.email}</p>
           <div className="flex justify-center mt-4 space-x-4">
             <a
               href="#"

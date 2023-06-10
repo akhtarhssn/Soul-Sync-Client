@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import InstructorCard from "./InstructorCard";
-import Loader from "../../../components/Loader";
-import Container from "../../../components/Container";
+import Container from "../../components/Container";
+import Loader from "../../components/Loader";
+import InstructorCard from "../Home/TopInstructor/InstructorCard";
 
-const TopInstructor = () => {
+const AllInstructors = () => {
   const { data: instructors = [], isLoading } = useQuery({
     queryKey: ["instructors"],
     queryFn: async () => {
@@ -17,15 +17,15 @@ const TopInstructor = () => {
     <div className="bg-[#1D0E15] dark:bg-white dark:text-black py-16">
       <Container>
         <div className="text-center py-16">
-          <p className="uppercase text-orange-600 dark:text-black font-medium">
-            Popular Instructors
+          <p className="uppercase text-orange-600 dark:text-orange-600 font-medium">
+            instructors
           </p>
-          <h2 className="text-4xl font-bold text-white dark:text-black capitalize">
-            Our Top Recommended Instructors
+          <h2 className="text-4xl font-bold text-white capitalize dark:text-black">
+            meet our instructors
           </h2>
         </div>
         {isLoading && <Loader />}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-5 md:p-0">
           {instructors
             .filter((instructor) => instructor.role === "Instructor")
             .map((instructor) => (
@@ -37,4 +37,4 @@ const TopInstructor = () => {
   );
 };
 
-export default TopInstructor;
+export default AllInstructors;

@@ -1,13 +1,22 @@
+import { Link } from "react-router-dom";
+import newLogo from "../../../assets/newLogo.png";
+
 const Footer = () => {
   return (
     <div className="bg-[#1D0E15] border-t dark:border-t-gray-400 border-t-gray-600 text-white dark:bg-base-200 dark:text-black">
       <footer className="footer p-10 lg:px-0 md:py-20 border-b border-b-gray-400 max-w-7xl container mx-auto">
         <div>
-          <h2 className="text-3xl font-bold my-5">SoulSync</h2>
+          <Link to={"/"}>
+            <img
+              src={newLogo}
+              alt="LOGO"
+              className="h-40 w-40 dark:invert-0 filter invert"
+            />
+          </Link>
           <p>
-            ACME Industries Ltd.
+            SoulSync PVT. LTD.
             <br />
-            Providing reliable tech since 1992
+            Providing reliable health services since 2023
           </p>
         </div>
         <div>

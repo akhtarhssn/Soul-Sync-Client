@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
 import { AuthContext } from "../../../providers/AuthProvider";
+import newLogo from "../../../assets/newLogo.png";
+
 const Navbar = () => {
   const { user, handleLogout } = useContext(AuthContext);
   const [scrolling, setScrolling] = useState(false);
@@ -35,10 +37,10 @@ const Navbar = () => {
         <Link to="/">Home</Link>
       </li>
       <li className="">
-        <Link>About</Link>
+        <Link to={"/courses"}>Courses</Link>
       </li>
       <li className="">
-        <Link>Services</Link>
+        <Link to={"/instructors"}>Instructors</Link>
       </li>
       <li className="">
         <Link>Contact</Link>
@@ -79,7 +81,18 @@ const Navbar = () => {
               {navMenuList}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">SoulSync</a>
+          <Link
+            className={`btn btn-ghost normal-case text-xl ${
+              scrolling ? "" : "filter invert"
+            }`}
+            to={"/"}
+          >
+            <img
+              src={newLogo}
+              alt=""
+              className="w-20 h-20 dark:filter dark:invert"
+            />
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 font-semibold text-lg">
