@@ -2,28 +2,28 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { FiCalendar, FiHome } from "react-icons/fi";
 import { BiNotepad } from "react-icons/bi";
 import { HiOutlineBars4 } from "react-icons/hi2";
-import { BsBagCheck, BsCartCheck, BsWallet2 } from "react-icons/bs";
+import { BsWallet2 } from "react-icons/bs";
+import { SiGoogleclassroom } from "react-icons/si";
 import { MdOutlineContactSupport, MdOutlineRateReview } from "react-icons/md";
 import { FaBars, FaUsers } from "react-icons/fa";
 import { AiOutlineBars } from "react-icons/ai";
-import { ImSpoonKnife } from "react-icons/im";
 import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const isAdmin = false;
   const isInstructor = false;
-  const isStudent = false;
+  const isStudent = true;
 
   return (
     <div>
       <Helmet>
-        <title>Bistro Boss | All Users</title>
+        <title>Soul Sync | Dashboard Home</title>
       </Helmet>
-      <div className="drawer drawer-mobile">
+      <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content md:py-10 py-5">
           {/* Page content here */}
-          <div className="px-5">
+          <div className="px-5 pt-20">
             <label
               htmlFor="my-drawer-2"
               className="btn btn-primary drawer-button lg:hidden"
@@ -33,15 +33,13 @@ const Dashboard = () => {
           </div>
           <Outlet />
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side pt-[103px]">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu text-black p-4 w-80 h-full bg-[#D1A054]">
+          <ul className="menu dark:text-black dark:bg-black p-4 w-80 h-full bg-gradient-to-b from-orange-600 to-orange-400 text-white md:py-10">
             <div className="uppercase px-4 py-0 mb-14">
-              <Link
-                to={isAdmin ? "/dashboard/admin-home" : "/dashboard/user-home"}
-              >
-                <h4 className="text-2xl font-bold">Bistro Boss</h4>
-                <p className="tracking-[.38em]">Restaurant</p>
+              <Link to="/">
+                <h4 className="text-2xl font-bold">Soul Sync</h4>
+                <p className="tracking-[.38em]">Empower your soul</p>
               </Link>
             </div>
             {/* Sidebar content here */}
@@ -51,11 +49,6 @@ const Dashboard = () => {
                   <NavLink to="/dashboard/admin-home">
                     {" "}
                     <FiHome /> Admin Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/add-item">
-                    <ImSpoonKnife /> Add Items
                   </NavLink>
                 </li>
                 <li>
@@ -72,7 +65,7 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <NavLink to="/dashboard/my-cart">
-                    <BsCartCheck />
+                    <SiGoogleclassroom />
                     My Cart
                   </NavLink>
                 </li>
@@ -86,37 +79,20 @@ const Dashboard = () => {
             ) : isInstructor ? (
               <>
                 <li>
-                  <NavLink to="/dashboard/user-home">
+                  <NavLink to="/dashboard/instructor-home">
                     {" "}
-                    <FiHome /> User Home
+                    <FiHome /> Instructor Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/reservation">
-                    <FiCalendar /> Reservation
+                  <NavLink to="/dashboard">
+                    <FiCalendar /> My Classes
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/payment-history">
+                  <NavLink to="/dashboard">
                     {" "}
-                    <BsWallet2 /> Payment History
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/my-cart">
-                    <BsCartCheck />
-                    My Cart
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/add-review">
-                    {" "}
-                    <MdOutlineRateReview /> Add Review
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/my-order  ">
-                    <BsBagCheck /> My Order
+                    <MdOutlineRateReview /> Add Classes
                   </NavLink>
                 </li>
               </>
@@ -124,37 +100,19 @@ const Dashboard = () => {
               isStudent && (
                 <>
                   <li>
-                    <NavLink to="/dashboard/user-home">
-                      {" "}
-                      <FiHome /> User Home
+                    <NavLink to="/dashboard/my-bookings">
+                      <FiCalendar /> Bookings
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/reservation">
-                      <FiCalendar /> Reservation
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/dashboard/payment-history">
+                    <NavLink to="/dashboard/my-payments">
                       {" "}
                       <BsWallet2 /> Payment History
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/my-cart">
-                      <BsCartCheck />
-                      My Cart
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/dashboard/add-review">
-                      {" "}
-                      <MdOutlineRateReview /> Add Review
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/dashboard/my-order  ">
-                      <BsBagCheck /> My Order
+                    <NavLink to="/dashboard/my-classes">
+                      <SiGoogleclassroom /> My Classes
                     </NavLink>
                   </li>
                 </>
@@ -167,13 +125,13 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/menu">
-                <FaBars /> Menu
+              <NavLink to="/classes">
+                <FaBars /> Classes
               </NavLink>
             </li>
             <li>
-              <NavLink to="/order/salad">
-                <BsBagCheck /> Shop
+              <NavLink to="/instructors">
+                <SiGoogleclassroom /> Instructor
               </NavLink>
             </li>
             <li>

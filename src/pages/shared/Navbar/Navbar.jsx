@@ -9,15 +9,14 @@ const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
-  const isAdmin = true;
+  const isAdmin = false;
   const isInstructor = false;
-  const isStudent = false;
+  const isStudent = true;
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     const htmlTag = document.querySelector("html");
     htmlTag.classList.toggle("dark");
-    console.log(htmlTag);
   };
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const Navbar = () => {
                 ? "/dashboard/admin-home"
                 : isInstructor
                 ? "/dashboard/instructor-home"
-                : isStudent && "/dashboard/student-home"
+                : isStudent && "/dashboard/my-bookings"
             }
           >
             Dashboard
@@ -135,7 +134,7 @@ const Navbar = () => {
                   <strong>{user?.displayName}</strong>
                 </p>
                 <li className="">
-                  <Link to="/dashboard/user-home" className="justify-between">
+                  <Link to="/dashboard/my-bookings" className="justify-between">
                     Profile
                   </Link>
                 </li>

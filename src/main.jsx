@@ -11,14 +11,17 @@ import AuthProvider from "./providers/AuthProvider";
 const queryClient = new QueryClient();
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { HelmetProvider } from "react-helmet-async";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <ToastContainer />
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <ToastContainer />
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </HelmetProvider>
     </AuthProvider>
   </React.StrictMode>
 );

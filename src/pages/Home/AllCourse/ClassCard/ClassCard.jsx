@@ -1,9 +1,69 @@
 import { MdChair } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../../../providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const ClassCard = ({ course }) => {
-  const { image, name, available_seats, enrolled_students, price, instructor } =
-    course;
+  const { user } = useContext(AuthContext);
+  const {
+    _id,
+    image,
+    name,
+    available_seats,
+    enrolled_students,
+    price,
+    instructor,
+  } = course;
+
+  const handleBookClass = () => {
+    const bookItem = {
+      itemId: _id,
+      name,
+      price,
+      image,
+      studentEmail: user?.email,
+    };
+    // console.log(item.name);
+    if (user) {
+      fetch("http://localhost:5000/bookings", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(bookItem),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            toast.success("Booking Success", {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            //refetch(); //refetch cart to update current
+            // console.log("Data Inserted Successfully");
+          }
+        });
+    } else {
+      toast.warning("Login Required", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
+
   return (
     <div
       className={`card border border-gray-700 dark:border-gray-200 shadow-xl  text-white dark:text-black group ${
@@ -60,6 +120,8 @@ const ClassCard = ({ course }) => {
                 ? "bg-white dark:bg-white text-black"
                 : "bg-orange-700 dark:bg-orange-500 dark:text-white"
             }`}
+            disabled={available_seats === 0}
+            onClick={() => handleBookClass(course)}
           >
             Enroll
           </button>
