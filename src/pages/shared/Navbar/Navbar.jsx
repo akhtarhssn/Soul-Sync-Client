@@ -10,8 +10,8 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   const isAdmin = false;
-  const isInstructor = false;
-  const isStudent = true;
+  const isInstructor = true;
+  const isStudent = false;
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -52,7 +52,7 @@ const Navbar = () => {
               isAdmin
                 ? "/dashboard/admin-home"
                 : isInstructor
-                ? "/dashboard/instructor-home"
+                ? "/dashboard/instructor-classes"
                 : isStudent && "/dashboard/my-bookings"
             }
           >

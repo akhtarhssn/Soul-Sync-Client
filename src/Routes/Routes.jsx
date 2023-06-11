@@ -6,12 +6,13 @@ import Login from "../pages/Login/Login";
 import AllCourses from "../pages/Home/AllCourse/AllCourses/AllCourses";
 import AllInstructors from "../pages/AllInstructors/AllInstructors";
 import AdminHome from "../pages/Dashboard/Admin/Home/AdminHome";
-import InstructorHome from "../pages/Dashboard/Instructor/Home/InstructorHome";
+import AddClass from "../pages/Dashboard/Instructor/AddClass/AddClass";
 import StudentBookings from "../pages/Dashboard/Student/Bookings/StudentBookings";
 import Dashboard from "../Layouts/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Payment from "../pages/Dashboard/Student/Payment/Payment";
 import MyClasses from "../pages/Dashboard/Student/MyClasses/MyClasses";
+import InstructorClasses from "../pages/Dashboard/Instructor/MyClasses/InstructorClasses";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +52,12 @@ const router = createBrowserRouter([
             element: <AdminHome />,
           },
           {
-            path: "instructor-home", // Update path to use relative path
-            element: <InstructorHome />,
+            path: "add-classes", // Update path to use relative path
+            element: <AddClass />,
+          },
+          {
+            path: "instructor-classes",
+            element: <InstructorClasses />,
           },
           {
             path: "my-bookings", // Update path to use relative path

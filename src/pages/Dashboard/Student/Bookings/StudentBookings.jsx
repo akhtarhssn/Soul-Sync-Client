@@ -4,6 +4,8 @@ import useBookings from "../../../../hooks/useBookings";
 import { Helmet } from "react-helmet-async";
 import BookingItem from "./BookingItem";
 import Loader from "../../../../components/Loader";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const StudentBookings = () => {
   const [bookings, refetch, isLoading] = useBookings();
@@ -13,17 +15,43 @@ const StudentBookings = () => {
     0
   );
 
-  console.log(totalPrice);
+  const handleDelete = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to remove ${item.name}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/delete-booking/${item._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              refetch();
+              toast.success(`Class has been Removed.`, {
+                position: "top-center",
+                theme: "dark",
+              });
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div>
       <Helmet>
         <title>Soul Sync | My Bookings</title>
       </Helmet>
-      <div className="bg-white max-w-7xl mx-auto p-10 rounded-md">
+      <div className="bg-[#f7f7f7] dark:bg-white dark:shadow-md max-w-7xl mx-auto p-10 rounded-md">
         {isLoading && <Loader />}
 
-        <div className="flex justify-between items-center text-xl font-semibold bg-orange-600 py-5 px-8 rounded-lg text-white dark:bg-gray-200 dark:text-black">
+        <div className="flex justify-between items-center text-xl font-semibold bg-gray-800 py-5 px-8 rounded-lg text-white dark:bg-gray-200 dark:text-black">
           <h4>Total Items: {bookings.length}</h4>
           <h4>Total Price: ${totalPrice.toFixed(2)}</h4>
         </div>
@@ -40,7 +68,12 @@ const StudentBookings = () => {
             </thead>
             <tbody>
               {bookings.map((item, index) => (
-                <BookingItem key={item._id} item={item} index={index} />
+                <BookingItem
+                  key={item._id}
+                  item={item}
+                  index={index}
+                  handleDelete={handleDelete}
+                />
               ))}
             </tbody>
           </table>
