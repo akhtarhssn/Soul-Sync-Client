@@ -16,14 +16,14 @@ const ManageClassesCard = ({ item, index }) => {
 
   const handleStatus = (value, id) => {
     const status = { value, id };
-    axiosSecure.post(`/class-status/${id}`, status).then((postData) => {
+    axiosSecure.patch(`/class-status/${id}`, status).then((postData) => {
       console.log("After Posting: ", { postData });
-      // if (postData.data.insertedId) {
-      //   toast.success("Item Added Successfully!", {
-      //     position: "top-center",
-      //     theme: "light",
-      //   });
-      // }
+      if (postData.data.modifiedCount) {
+        toast.success("Item Added Successfully!", {
+          position: "top-center",
+          theme: "light",
+        });
+      }
     });
   };
 
@@ -49,7 +49,7 @@ const ManageClassesCard = ({ item, index }) => {
       <td className="text-center"> {available_seats}</td>
       <td className="text-right">${price}</td>
       <td className="text-center flex items-center gap-5 font-semibold">
-        {status !== "Approved" ? (
+        {status !== "Approved" && status !== "Denied" ? (
           <>
             <button
               className="w-full py-2 px-5 rounded-full bg-green-700 text-white"
@@ -65,7 +65,15 @@ const ManageClassesCard = ({ item, index }) => {
             </button>
           </>
         ) : (
-          <p className="text-green-700 font-bold mx-auto">Approved</p>
+          <p
+            className={`${
+              status === "Approved"
+                ? "text-green-700"
+                : status === "Denied" && "text-red-600"
+            } font-bold mx-auto`}
+          >
+            {status}
+          </p>
         )}
       </td>
     </tr>
