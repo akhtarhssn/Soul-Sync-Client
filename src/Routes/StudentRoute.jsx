@@ -9,7 +9,6 @@ const StudentRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const [isStudent, isStudentLoading, error] = useStudent();
   const location = useLocation();
-  console.log(error);
 
   if (loading || isStudentLoading) {
     return <Loader />;
