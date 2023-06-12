@@ -39,5 +39,5 @@ https://soul-sync-client.web.app/
 - jwt verified
 ## Screenshots
 
-![App Screenshot](https://i.ibb.co/0qkTV9z/screencapture-soul-sync-client-web-app-2023-06-12-23-23-47.png)
+![App Screenshot](https://i.ibb.co/pJrnfyG/soul-sync.png)
 
