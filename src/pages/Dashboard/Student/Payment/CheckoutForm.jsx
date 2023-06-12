@@ -3,15 +3,17 @@ import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 // import "./CheckoutForm.css";
 
-const CheckoutForm = ({ price, cart }) => {
+const CheckoutForm = ({ price, bookings }) => {
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
   const [axiosSecure] = useAxiosSecure();
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (price > 0) {
@@ -84,16 +86,7 @@ const CheckoutForm = ({ price, cart }) => {
 
     if (paymentIntent.status === "succeeded") {
       const transactionId = paymentIntent.id;
-      toast.success(`Payment Success`, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+
       // TODO: Next steps
       // Save payment info to server
       const payment = {
@@ -102,15 +95,25 @@ const CheckoutForm = ({ price, cart }) => {
         price,
         date: new Date(),
         status: "Pending",
-        quantity: cart.length,
-        cartItems: cart.map((item) => item._id),
-        cartItemNames: cart.map((item) => item.name),
-        menuItems: cart.map((item) => item.itemId),
+        quantity: bookings.length,
+        bookingsItems: bookings.map((item) => item._id),
+        bookingsItemNames: bookings.map((item) => item.name),
+        classItems: bookings.map((item) => item.itemId),
       };
       axiosSecure.post("/payments", payment).then((res) => {
         console.log(res.data);
         if (res.data.result.insertedId) {
-          console.log("insert Successful");
+          navigate("/dashboard/my-payments");
+          toast.success(`Payment Success`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       });
     }

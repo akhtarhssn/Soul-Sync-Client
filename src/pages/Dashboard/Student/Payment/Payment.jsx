@@ -16,10 +16,10 @@ const Payment = () => {
   const price = parseFloat(totalPrice.toFixed(2));
   return (
     <div className="flex justify-center items-center h-[90vh]">
-      <div className="max-w-xl container mx-auto xl:p-0 text-center">
-        <Helmet>
-          <title>Bistro Boss | Payment</title>
-        </Helmet>
+      <Helmet>
+        <title>Soul Sync | Payment</title>
+      </Helmet>
+      <div className="max-w-xl container mx-auto text-center bg-white p-14 rounded-lg">
         <h3 className="text-2xl md:text-4xl font-semibold">
           Amount to Pay: ${price}
         </h3>
