@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../../components/Loader";
 import ClassCard from "../ClassCard/ClassCard";
 import Container from "../../../../components/Container";
+import { Helmet } from "react-helmet-async";
 
 const AllCourses = () => {
   const { data: classes = [], isLoading } = useQuery({
@@ -16,6 +17,9 @@ const AllCourses = () => {
 
   return (
     <div className="bg-[#1D0E15] dark:bg-white dark:text-black py-16">
+      <Helmet>
+        <title>Soul Sync | All Classes</title>
+      </Helmet>
       <Container>
         <div className="text-center py-16">
           <p className="uppercase text-orange-600 dark:text-black font-medium">

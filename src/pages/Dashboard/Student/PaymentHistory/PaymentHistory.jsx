@@ -3,6 +3,7 @@ import { AuthContext } from "../../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loader from "../../../../components/Loader";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   const { user, loading } = useContext(AuthContext);
@@ -19,6 +20,9 @@ const PaymentHistory = () => {
   console.log(paymentHistory);
   return (
     <>
+      <Helmet>
+        <title>Soul Sync | Payment History</title>
+      </Helmet>
       <h2 className="text-4xl font-bold text-white dark:text-gray-700 text-center py-5">
         Payment History
       </h2>

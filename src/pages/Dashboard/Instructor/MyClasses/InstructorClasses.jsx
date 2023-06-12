@@ -24,7 +24,7 @@ const InstructorClasses = () => {
   return (
     <div className="p-5">
       <Helmet>
-        <title>Soul Sync | My Bookings</title>
+        <title>Soul Sync | My Added Class</title>
       </Helmet>
       <div className="bg-[#f7f7f7] dark:bg-white dark:shadow-md max-w-6xl mx-auto p-10 rounded-md">
         {isLoading && <Loader />}

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const AddItem = () => {
   const imageHostingToken = import.meta.env.VITE_IMGBB_API_KEY;
@@ -52,6 +53,9 @@ const AddItem = () => {
 
   return (
     <div className="container mx-auto p-5 2xl:p-0">
+      <Helmet>
+        <title>Soul Sync | Add Class</title>
+      </Helmet>
       <div className="w-full md:max-w-3xl mx-auto dark:bg-gray-900 bg-gray-200 p-5 md:p-20 rounded-xl ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">

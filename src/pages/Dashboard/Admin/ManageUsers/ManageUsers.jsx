@@ -99,7 +99,7 @@ const ManageUsers = () => {
   return (
     <div className="p-5">
       <Helmet>
-        <title>Bistro Boss | All Users</title>
+        <title>Soul Sync | Manage Users</title>
       </Helmet>
       <div className="container bg-white w-full mx-auto p-5 md:p-10 rounded-md">
         <div className=" text-xl font-semibold">
