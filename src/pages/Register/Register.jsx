@@ -40,7 +40,7 @@ const RegisterTest = () => {
               photo: data.photo,
               role: "Student",
             };
-            fetch("http://localhost:5000/users/", {
+            fetch("https://soul-sync-server.vercel.app/users/", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -85,7 +85,7 @@ const RegisterTest = () => {
           photo: user.photoURL,
           role: "Student",
         };
-        fetch("http://localhost:5000/users/", {
+        fetch("https://soul-sync-server.vercel.app/users/", {
           method: "POST",
           headers: {
             "content-type": "application/json",

@@ -3,9 +3,11 @@ import { FaUserFriends } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { toast } from "react-toastify";
+import useStudent from "../../../../hooks/useStudent";
 
 const ClassCard = ({ course }) => {
   const { user } = useContext(AuthContext);
+  const [isStudent] = useStudent();
   const {
     _id,
     image,
@@ -26,7 +28,7 @@ const ClassCard = ({ course }) => {
     };
     // console.log(item.name);
     if (user) {
-      fetch("http://localhost:5000/bookings", {
+      fetch("https://soul-sync-server.vercel.app/bookings", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -113,7 +115,7 @@ const ClassCard = ({ course }) => {
             <span className="font-semibold">{instructor}</span>
           </p>
         </div>
-        <div className="card-actions mt-3">
+        <div className={`card-actions mt-3 ${isStudent ? "block" : "hidden"}`}>
           <button
             className={`py-3 px-8 rounded font-semibold uppercase ${
               available_seats === 0

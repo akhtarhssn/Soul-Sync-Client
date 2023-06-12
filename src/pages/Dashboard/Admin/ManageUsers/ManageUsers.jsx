@@ -21,34 +21,10 @@ const ManageUsers = () => {
     },
   });
 
-  const handleDelete = (user) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: `You want to remove ${user.name}`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/${user._id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount) {
-              refetch();
-              toast.success(`${user.name} has been Removed.`);
-            }
-          });
-      }
-    });
-  };
   const handleMakeAdmin = (user) => {
     Swal.fire({
       title: "Are you sure?",
-      text: `You want to make ${user.name} an admin`,
+      text: `You want to make ${user.name} an Admin`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -60,7 +36,57 @@ const ManageUsers = () => {
           console.log("After Posting: ", { postData });
           if (postData.data.modifiedCount) {
             refetch(),
-              toast.success("Item Added Successfully!", {
+              toast.success("Updated Successfully!", {
+                position: "top-center",
+                theme: "light",
+              });
+          }
+        });
+      }
+    });
+  };
+
+  const handleMakeInstructor = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to make ${user.name} an Instructor`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/instructor/${user._id}`).then((postData) => {
+          console.log("After Posting: ", { postData });
+          if (postData.data.modifiedCount) {
+            refetch(),
+              toast.success("Updated Successfully!", {
+                position: "top-center",
+                theme: "light",
+              });
+          }
+        });
+      }
+    });
+  };
+
+  const handleMakeStudent = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to make ${user.name} a Student`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/student/${user._id}`).then((postData) => {
+          console.log("After Posting: ", { postData });
+          if (postData.data.modifiedCount) {
+            refetch(),
+              toast.success("Updated Successfully!", {
                 position: "top-center",
                 theme: "light",
               });
@@ -90,7 +116,6 @@ const ManageUsers = () => {
                 <th>Email</th>
                 <th>Role</th>
                 <th className="text-center">Action</th>
-                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -100,8 +125,9 @@ const ManageUsers = () => {
                   key={user._id}
                   user={user}
                   index={index}
-                  handleDelete={handleDelete}
                   handleMakeAdmin={handleMakeAdmin}
+                  handleMakeInstructor={handleMakeInstructor}
+                  handleMakeStudent={handleMakeStudent}
                 />
               ))}
             </tbody>

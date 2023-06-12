@@ -7,7 +7,7 @@ import Loader from "../../../../components/Loader";
 const PaymentHistory = () => {
   const { user, loading } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
-  const { data: paymentHistory = [], isLoading } = useQuery({
+  const { data: paymentHistory = [] } = useQuery({
     queryKey: ["paymentHistory"],
     enabled: !!user && !loading,
     queryFn: async () => {
@@ -36,7 +36,6 @@ const PaymentHistory = () => {
               </tr>
             </thead>
             <tbody>
-              {isLoading && <Loader />}
               {/* row 1 */}
               {paymentHistory.map((payment, index) => (
                 <tr key={payment._id}>

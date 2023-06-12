@@ -1,6 +1,10 @@
-import { IoMdRemoveCircle } from "react-icons/io";
-
-const User = ({ user, index, handleDelete, handleMakeAdmin }) => {
+const User = ({
+  user,
+  index,
+  handleMakeAdmin,
+  handleMakeInstructor,
+  handleMakeStudent,
+}) => {
   const { name, email, role } = user;
   return (
     <tr>
@@ -8,27 +12,24 @@ const User = ({ user, index, handleDelete, handleMakeAdmin }) => {
       <td>{name}</td>
       <td>{email}</td>
       <td>{role}</td>
-      <td className=" space-x-4">
+      <td className="text-center space-x-4">
         <button
           className="bg-red-600 py-2 px-4 rounded-full text-white"
           onClick={() => handleMakeAdmin(user)}
         >
           Admin
         </button>
-        <button className="bg-amber-600 py-2 px-4 rounded-full text-white">
+        <button
+          className="bg-amber-600 py-2 px-4 rounded-full text-white"
+          onClick={() => handleMakeInstructor(user)}
+        >
           Instructor
         </button>
-        <button className="bg-green-600 py-2 px-4 rounded-full text-white">
-          Student
-        </button>
-      </td>
-      <td>
         <button
-          className="text-xl bg-red-600 p-2 rounded text-white"
-          onClick={() => handleDelete(user)}
+          className="bg-green-600 py-2 px-4 rounded-full text-white"
+          onClick={() => handleMakeStudent(user)}
         >
-          {" "}
-          <IoMdRemoveCircle />{" "}
+          Student
         </button>
       </td>
     </tr>
