@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -116,6 +117,9 @@ const Login = () => {
 
   return (
     <div className="py-16 container mx-auto min-h-screen md:flex justify-center items-center">
+      <Helmet>
+        <title>Soul Sync | Login</title>
+      </Helmet>
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-10 p-5">
         <div className="text-center lg:text-left my-10 md:my-0 bg-cover">
           <img

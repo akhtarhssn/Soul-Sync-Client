@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import { BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
 import { AuthContext } from "../../../providers/AuthProvider";
 import newLogo from "../../../assets/newLogo.png";
+import useAdmin from "../../../hooks/useAdmin";
+import useInstructor from "../../../hooks/useInstructor";
+import useStudent from "../../../hooks/useStudent";
 
 const Navbar = () => {
   const { user, handleLogout } = useContext(AuthContext);
   const [scrolling, setScrolling] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
-  const isAdmin = false;
-  const isInstructor = true;
-  const isStudent = false;
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
+  const [isStudent] = useStudent();
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -50,7 +53,7 @@ const Navbar = () => {
           <Link
             to={
               isAdmin
-                ? "/dashboard/admin-home"
+                ? "/dashboard/manage-classes"
                 : isInstructor
                 ? "/dashboard/instructor-classes"
                 : isStudent && "/dashboard/my-bookings"

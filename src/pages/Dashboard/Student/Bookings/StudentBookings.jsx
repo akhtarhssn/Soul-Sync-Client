@@ -44,11 +44,11 @@ const StudentBookings = () => {
   };
 
   return (
-    <div>
+    <div className="p-5">
       <Helmet>
         <title>Soul Sync | My Bookings</title>
       </Helmet>
-      <div className="bg-[#f7f7f7] dark:bg-white dark:shadow-md max-w-7xl mx-auto p-10 rounded-md">
+      <div className="bg-[#f7f7f7] dark:bg-white dark:shadow-md max-w-6xl mx-auto p-10 rounded-md">
         {isLoading && <Loader />}
 
         <div className="flex justify-between items-center text-xl font-semibold bg-gray-800 py-5 px-8 rounded-lg text-white dark:bg-gray-200 dark:text-black">

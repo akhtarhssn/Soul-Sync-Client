@@ -5,7 +5,7 @@ import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import AllCourses from "../pages/Home/AllCourse/AllCourses/AllCourses";
 import AllInstructors from "../pages/AllInstructors/AllInstructors";
-import AdminHome from "../pages/Dashboard/Admin/Home/AdminHome";
+import ManageClasses from "../pages/Dashboard/Admin/ManageClasses/ManageClasses";
 import AddClass from "../pages/Dashboard/Instructor/AddClass/AddClass";
 import StudentBookings from "../pages/Dashboard/Student/Bookings/StudentBookings";
 import Dashboard from "../Layouts/Dashboard";
@@ -13,6 +13,10 @@ import PrivateRoute from "./PrivateRoute";
 import Payment from "../pages/Dashboard/Student/Payment/Payment";
 import MyClasses from "../pages/Dashboard/Student/MyClasses/MyClasses";
 import InstructorClasses from "../pages/Dashboard/Instructor/MyClasses/InstructorClasses";
+import InstructorRoute from "./InstructorRoute";
+import AdminRoute from "./AdminRoute";
+import StudentRoute from "./StudentRoute";
+import UnAuthorized from "../pages/UnAuthorized/UnAuthorized";
 
 const router = createBrowserRouter([
   {
@@ -48,32 +52,57 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            path: "admin-home", // Update path to use relative path
-            element: <AdminHome />,
+            path: "manage-classes", // Update path to use relative path
+            element: (
+              <AdminRoute>
+                <ManageClasses />
+              </AdminRoute>
+            ),
           },
           {
             path: "add-classes", // Update path to use relative path
-            element: <AddClass />,
+            element: (
+              <InstructorRoute>
+                <AddClass />
+              </InstructorRoute>
+            ),
           },
           {
             path: "instructor-classes",
-            element: <InstructorClasses />,
+            element: (
+              <InstructorRoute>
+                <InstructorClasses />
+              </InstructorRoute>
+            ),
           },
           {
             path: "my-bookings", // Update path to use relative path
-            element: <StudentBookings />,
+            element: (
+              <StudentBookings />
+              //   <StudentRoute>
+              // </StudentRoute>
+            ),
           },
           {
             path: "my-payments", // Update path to use relative path
-            element: <Payment />,
+            element: (
+              <StudentRoute>
+                <Payment />
+              </StudentRoute>
+            ),
           },
           {
             path: "my-classes", // Update path to use relative path
-            element: <MyClasses />,
+            element: (
+              <StudentRoute>
+                <MyClasses />
+              </StudentRoute>
+            ),
           },
         ],
       },
     ],
+    errorElement: <UnAuthorized />,
   },
 ]);
 

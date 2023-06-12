@@ -6,18 +6,21 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { FaBars, FaUsers } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
+import useStudent from "../hooks/useStudent";
 
 const Dashboard = () => {
-  const isAdmin = false;
-  const isInstructor = true;
-  const isStudent = false;
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
+  const [isStudent] = useStudent();
 
   return (
     <div className="bg-[#1D0E15] dark:bg-[#f7f7f7]">
       <Helmet>
         <title>Soul Sync | Dashboard Home</title>
       </Helmet>
-      <div className="drawer lg:drawer-open items-center">
+      <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content md:py-10 py-5">
           {/* Page content here */}

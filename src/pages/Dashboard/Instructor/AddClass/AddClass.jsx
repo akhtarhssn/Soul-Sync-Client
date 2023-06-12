@@ -37,12 +37,12 @@ const AddItem = () => {
             admin_feedback: "",
           };
           axiosSecure.post("/add-class", newClass).then((postData) => {
-            console.log("After Posting: ", { postData });
+            // console.log("After Posting: ", { postData });
             if (postData.data.insertedId) {
               reset();
               toast.success("Item Added Successfully!", {
                 position: "top-center",
-                theme: "dark",
+                theme: "light",
               });
             }
           });
@@ -67,7 +67,7 @@ const AddItem = () => {
               name="name"
               {...register("name")}
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              placeholder="Chicken and Walnut Salad"
+              placeholder="Class Name"
               required
             />
           </div>
