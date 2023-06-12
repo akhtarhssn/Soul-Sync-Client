@@ -78,7 +78,7 @@ const Dashboard = () => {
                 <>
                   <li>
                     <NavLink to="/dashboard/my-bookings">
-                      <FiCalendar /> Bookings
+                      <FiCalendar /> My Selected Classes
                     </NavLink>
                   </li>
                   <li>
@@ -89,7 +89,7 @@ const Dashboard = () => {
                   </li>
                   <li>
                     <NavLink to="/dashboard/my-classes">
-                      <SiGoogleclassroom /> My Classes
+                      <SiGoogleclassroom /> My Enrolled Classes
                     </NavLink>
                   </li>
                 </>

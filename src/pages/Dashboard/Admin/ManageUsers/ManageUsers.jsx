@@ -56,16 +56,16 @@ const ManageUsers = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
-          method: "PATCH",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.modifiedCount) {
-              refetch();
-              toast.success(`${user.name} is now an Admin.`);
-            }
-          });
+        axiosSecure.patch(`/users/admin/${user._id}`).then((postData) => {
+          console.log("After Posting: ", { postData });
+          if (postData.data.modifiedCount) {
+            refetch(),
+              toast.success("Item Added Successfully!", {
+                position: "top-center",
+                theme: "light",
+              });
+          }
+        });
       }
     });
   };

@@ -2,23 +2,28 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import MyClassCard from "./MyClassCard";
 
 const MyClasses = () => {
   const { user, loading } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
-  const { data: classes = [] } = useQuery({
-    queryKey: ["classes"],
+  const { data: enrolledClasses = [] } = useQuery({
+    queryKey: ["enrolledClasses"],
     enabled: !!user && !loading,
     queryFn: async () => {
       const res = await axiosSecure(`/my-classes?email=${user?.email}`);
       return res.data;
     },
   });
-  console.log(classes);
+  console.log(enrolledClasses);
 
   return (
-    <div>
-      <h2 className="text-white">Hello World</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 p-5">
+      {enrolledClasses
+        .filter((course) => course.status === "Approved")
+        .map((course) => (
+          <MyClassCard key={course._id} course={course} />
+        ))}
     </div>
   );
 };

@@ -97,7 +97,6 @@ const CheckoutForm = ({ price, bookings }) => {
         status: "Pending",
         quantity: bookings.length,
         bookingsItems: bookings.map((item) => item._id),
-        bookingsItemNames: bookings.map((item) => item.name),
         classItems: bookings.map((item) => item.itemId),
       };
       axiosSecure.post("/payments", payment).then((res) => {
