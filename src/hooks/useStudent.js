@@ -16,7 +16,7 @@ const useStudent = () => {
     queryFn: async () => {
       try {
         const res = await axiosSecure.get(`/users/student/${user?.email}`);
-        console.log("isStudent Res:", res);
+        // console.log("isStudent Res:", res);
         return res.data;
       } catch (error) {
         throw new Error(error.response?.data?.message || "UnAuthorized access");

@@ -12,8 +12,6 @@ const ManageClasses = () => {
     },
   });
 
-  console.log(classes);
-
   return (
     <div className="p-5">
       <Helmet>
