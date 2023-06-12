@@ -9,6 +9,7 @@ const StudentRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const [isStudent, isStudentLoading, error] = useStudent();
   const location = useLocation();
+  console.log(error);
 
   if (loading || isStudentLoading) {
     return <Loader />;
@@ -23,7 +24,7 @@ const StudentRoute = ({ children }) => {
     theme: "light",
   });
 
-  return <Navigate to="/" state={{ from: location }} replace />;
+  return <Navigate to="/error" state={{ from: location }} replace />;
 };
 
 export default StudentRoute;

@@ -18,6 +18,7 @@ import AdminRoute from "./AdminRoute";
 import StudentRoute from "./StudentRoute";
 import UnAuthorized from "../pages/UnAuthorized/UnAuthorized";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -83,16 +84,24 @@ const router = createBrowserRouter([
           {
             path: "my-bookings", // Update path to use relative path
             element: (
-              <StudentBookings />
-              //   <StudentRoute>
-              // </StudentRoute>
+              <StudentRoute>
+                <StudentBookings />
+              </StudentRoute>
+            ),
+          },
+          {
+            path: "payment",
+            element: (
+              <StudentRoute>
+                <Payment />
+              </StudentRoute>
             ),
           },
           {
             path: "my-payments", // Update path to use relative path
             element: (
               <StudentRoute>
-                <Payment />
+                <PaymentHistory />
               </StudentRoute>
             ),
           },
@@ -108,6 +117,10 @@ const router = createBrowserRouter([
       },
     ],
     errorElement: <UnAuthorized />,
+  },
+  {
+    path: "error",
+    element: <UnAuthorized />,
   },
 ]);
 

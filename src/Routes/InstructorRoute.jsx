@@ -17,7 +17,7 @@ const InstructorRoute = ({ children }) => {
     return children;
   }
 
-  return <Navigate to="/" state={{ from: location }} replace />;
+  return <Navigate to="/error" state={{ from: location }} replace />;
 };
 
 export default InstructorRoute;
