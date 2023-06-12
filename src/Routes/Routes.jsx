@@ -17,6 +17,7 @@ import InstructorRoute from "./InstructorRoute";
 import AdminRoute from "./AdminRoute";
 import StudentRoute from "./StudentRoute";
 import UnAuthorized from "../pages/UnAuthorized/UnAuthorized";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
                 <ManageClasses />
               </AdminRoute>
             ),
+          },
+          {
+            path: "manage-users",
+            element: <ManageUsers />,
           },
           {
             path: "add-classes", // Update path to use relative path

@@ -3,11 +3,15 @@ import { Helmet } from "react-helmet-async";
 import Loader from "../../../../components/Loader";
 import ManageClassesCard from "../ManageClassesCard/ManageClassesCard";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const ManageClasses = () => {
-  const [axisoSecure] = useAxiosSecure();
-
-  const { data: classes = [], isLoading } = useQuery({
+  const [axiosSecure] = useAxiosSecure();
+  const {
+    data: classes = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/all-classes");
@@ -15,26 +19,18 @@ const ManageClasses = () => {
     },
   });
 
-  const handleStatusUpdate = async (classId, status, feedback) => {
-    try {
-      // Make API request to update class status
-      const response = await axisoSecure.patch(`/classes/${classId}`, {
-        status,
-        admin_feedback: feedback,
-      });
-
-      // Handle response
-      if (response.data.success) {
-        // Class status and admin feedback updated successfully
-        // Perform any necessary actions (e.g., show success toast, update state)
-      } else {
-        // Failed to update class status and admin feedback
-        // Handle the error (e.g., show error toast, log the error)
+  const handleStatus = (value, id) => {
+    const status = { value, id };
+    axiosSecure.patch(`/class-status/${id}`, status).then((postData) => {
+      console.log("After Posting: ", { postData });
+      if (postData.data.modifiedCount) {
+        refetch(),
+          toast.success("Item Added Successfully!", {
+            position: "top-center",
+            theme: "light",
+          });
       }
-    } catch (error) {
-      // An error occurred while making the API request
-      // Handle the error (e.g., show error toast, log the error)
-    }
+    });
   };
 
   return (
@@ -57,6 +53,7 @@ const ManageClasses = () => {
                 <th className="text-center">Available Seats</th>
                 <th className="text-right">Price</th>
                 <th className="text-center">Status</th>
+                <th className="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -65,7 +62,7 @@ const ManageClasses = () => {
                   key={item._id}
                   item={item}
                   index={index}
-                  handleStatusUpdate={handleStatusUpdate}
+                  handleStatus={handleStatus}
                 />
               ))}
             </tbody>

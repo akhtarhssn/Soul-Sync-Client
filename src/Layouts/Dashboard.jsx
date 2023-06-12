@@ -47,13 +47,13 @@ const Dashboard = () => {
             {isAdmin ? (
               <>
                 <li>
-                  <NavLink to="/dashboard/my-cart">
+                  <NavLink to="/dashboard/manage-classes">
                     <SiGoogleclassroom />
                     Manage Classes
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/all-users">
+                  <NavLink to="/dashboard/manage-users">
                     {" "}
                     <FaUsers /> All Users
                   </NavLink>

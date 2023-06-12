@@ -1,7 +1,7 @@
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { toast } from "react-toastify";
+import { BsCheck2Square } from "react-icons/bs";
+import { AiOutlineCloseSquare } from "react-icons/ai";
 
-const ManageClassesCard = ({ item, index }) => {
+const ManageClassesCard = ({ item, index, handleStatus }) => {
   const {
     _id,
     name,
@@ -12,20 +12,6 @@ const ManageClassesCard = ({ item, index }) => {
     instructor_email,
     available_seats,
   } = item;
-  const [axiosSecure] = useAxiosSecure();
-
-  const handleStatus = (value, id) => {
-    const status = { value, id };
-    axiosSecure.patch(`/class-status/${id}`, status).then((postData) => {
-      console.log("After Posting: ", { postData });
-      if (postData.data.modifiedCount) {
-        toast.success("Item Added Successfully!", {
-          position: "top-center",
-          theme: "light",
-        });
-      }
-    });
-  };
 
   return (
     <tr>
@@ -48,8 +34,19 @@ const ManageClassesCard = ({ item, index }) => {
       <td>{instructor_email}</td>
       <td className="text-center"> {available_seats}</td>
       <td className="text-right">${price}</td>
+      <td className="text-right">
+        <p
+          className={`${
+            status === "Approved"
+              ? "text-green-700"
+              : status === "Denied" && "text-red-600"
+          } font-bold mx-auto`}
+        >
+          {status}
+        </p>
+      </td>
       <td className="text-center flex items-center gap-5 font-semibold">
-        {status !== "Approved" && status !== "Denied" ? (
+        {/* {status !== "Approved" && status !== "Denied" ? (
           <>
             <button
               className="w-full py-2 px-5 rounded-full bg-green-700 text-white"
@@ -74,7 +71,20 @@ const ManageClassesCard = ({ item, index }) => {
           >
             {status}
           </p>
-        )}
+        )} */}
+
+        <button
+          className="w-full p-3 rounded-full bg-green-700 text-white"
+          onClick={() => handleStatus("Approved", _id)}
+        >
+          <BsCheck2Square size={25} />
+        </button>
+        <button
+          className="w-full p-3 rounded-full bg-red-700 text-white"
+          onClick={() => handleStatus("Denied", _id)}
+        >
+          <AiOutlineCloseSquare size={25} />
+        </button>
       </td>
     </tr>
   );
