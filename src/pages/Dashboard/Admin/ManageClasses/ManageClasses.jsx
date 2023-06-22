@@ -14,9 +14,7 @@ const ManageClasses = () => {
   } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://soul-sync-server.vercel.app/all-classes"
-      );
+      const res = await fetch("http://localhost:5000/all-classes");
       return res.json();
     },
   });

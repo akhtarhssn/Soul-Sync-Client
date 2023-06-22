@@ -99,9 +99,51 @@ const CheckoutForm = ({ price, bookings }) => {
         bookingsItems: bookings.map((item) => item._id),
         classItems: bookings.map((item) => item.itemId),
       };
+      // axiosSecure.post("/payments", payment).then((res) => {
+      //   console.log(res.data);
+      //   if (res.data.result.insertedId) {
+      //     // call the class update api?
+
+      //     navigate("/dashboard/my-payments");
+      //     toast.success(`Payment Success`, {
+      //       position: "top-center",
+      //       autoClose: 3000,
+      //       hideProgressBar: false,
+      //       closeOnClick: true,
+      //       pauseOnHover: true,
+      //       draggable: true,
+      //       progress: undefined,
+      //       theme: "light",
+      //     });
+      //   }
+      // });
+
       axiosSecure.post("/payments", payment).then((res) => {
         console.log(res.data);
         if (res.data.result.insertedId) {
+          // Get the array of class item IDs from the response
+          const classItems = res.data.classItems;
+
+          // Iterate over each class item and call the class update API
+          classItems.forEach((classId) => {
+            const classUpdate = {
+              id: classId,
+              value: "some value", // Specify the value you want to update for each class item
+            };
+
+            // Call the class update API
+            axiosSecure
+              .patch(`/classes/${classUpdate.id}`, classUpdate)
+              .then((response) => {
+                console.log(response.data);
+                // Handle the response or perform any additional actions
+              })
+              .catch((error) => {
+                console.error(error);
+                // Handle errors if necessary
+              });
+          });
+
           navigate("/dashboard/my-payments");
           toast.success(`Payment Success`, {
             position: "top-center",

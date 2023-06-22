@@ -76,7 +76,7 @@ const AuthProvider = ({ children }) => {
       // Get and set Token
       if (currentUser) {
         axios
-          .post("https://soul-sync-server.vercel.app/jwt", {
+          .post("http://localhost:5000/jwt", {
             email: currentUser.email,
           })
           .then((data) => {

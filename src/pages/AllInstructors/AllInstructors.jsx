@@ -8,7 +8,7 @@ const AllInstructors = () => {
   const { data: instructors = [], isLoading } = useQuery({
     queryKey: ["instructors"],
     queryFn: async () => {
-      const res = await fetch("https://soul-sync-server.vercel.app/instructor");
+      const res = await fetch("http://localhost:5000/instructor");
       return res.json();
     },
   });
